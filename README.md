@@ -1,5 +1,5 @@
 # MultiDimensionalKNN
-A k-nearest neighbours classifier that can operate on multidimensional data. It is created from scratch so no external modules needed.
+A k-nearest neighbours classifier that can operate on multidimensional data. It is created from scratch so no external modules are needed.
 
 ## How to use the classifier ##
 You can find the following code in the [example.py](./example.py) file.
