@@ -49,6 +49,7 @@ This will results in the creation of four lists:
   - y_train: A list containing the labels of the first 140 datapoints.
   - x_test: A list of lists containing the coordinates of the last 10 datapoints.
   - y_test: A list containing the labels of the last 10 datapoints.
+
 Of course you can change 140 to any number you like or use a more sophisticated method to get shuffled testing data.
 In case you want to see what each number in the features represents just run:
 ```
