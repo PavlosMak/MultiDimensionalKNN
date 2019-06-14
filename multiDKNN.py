@@ -74,13 +74,26 @@ class MultiDKNN():
                 most_common_element = i
                 most_common_element_vote = counter[i]
         return most_common_element    
-        
+    
+    def confidence(self,prediction,other_labels):
+        '''
+        Calculates the confidence of the model into its prediciton.Takes 2 arguments:
+            prediction: The prediciton of the model. Its type depends on the type of the labels in the training dataset
+            other_labels: A list object that contains all the possible labels of the unlabeled point 
+        '''
+        num_of_sames = 0
+        for i in other_labels:
+            if i == prediction:
+                num_of_sames += 1
+        return (num_of_sames/len(other_labels))*100
+    
     def predict(self,p,k):
         '''
         Predicts the label of a new point or points. Takes 2 arguments:
             p: Unlabeled point/points must be a list-like object that either containes floating point values (for one point) or 
                 list-like objects containing floating point values (for many points, each list represents a point)
-            k: The number of nearest neighbors the classifier takes into consideration. Must be an integer
+            k: The number of nearest neighbors the classifier takes into consideration. Must be an integer.
+        For each in point it returns a list containing the predicted label (index 0) and the confidence of the model in its decision (index 1).
         '''
         if self.check_iterable(p) == True:
             if self.check_iterable(p[0]) != True:
@@ -93,7 +106,7 @@ class MultiDKNN():
                 smallest_distances_indexes = self.argsort(distances)
                 for i in smallest_distances_indexes[:k]:
                     possible_labels.append(self.y[i])   
-                return self.mode(possible_labels)
+                return [self.mode(possible_labels),self.confidence(self.mode(possible_labels),possible_labels)]
             else:
                 outcomes = []
                 for point in p:
